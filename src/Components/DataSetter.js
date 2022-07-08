@@ -10,23 +10,25 @@ export default function DataSetter(props) {
 	<form action="" className="form" >
 		<div className="container">
 			<label htmlFor="data">Дата (ДД.ММ.ГГ)</label>
-			<input type="text" name="data" value={dataValue} onChange={(evt) => {
+			<input type="date" name="data" value={dataValue} onChange={(evt) => {
 				setDataValue(evt.target.value);
 			}
 			}/>
 		</div>
 		<div className="container">
 			<label htmlFor="kilom">Пройдено км</label>
-			<input type="text" name="kilom" value={kmValue} onChange={(evt) => {
+			<input type="number" name="kilom" value={kmValue} onChange={(evt) => {
 				setKmValue(evt.target.value);
 			}
 			}/>
 		</div>
 		<button type="submit" onClick={(evt) => {
 			evt.preventDefault();
-			arr({data: dataValue, km: kmValue, id: nanoid()})
-			setDataValue('');
-			setKmValue('');
+			if(kmValue !== ''){
+			  arr({data: dataValue, km: kmValue, id: nanoid()})
+			  setDataValue('');
+			  setKmValue('');
+			}
 		}
 		}>
 		OK

@@ -6,6 +6,12 @@ import React, { useState } from 'react';
 
 function App() {
   const [ arr, setArr ] = useState([]);
+
+  const prepareArr = (arr) => {
+    return arr.sort((a, b) => {
+      return a - b;
+    });
+  }
   return (
     <div className="App">
       <DataSetter 
@@ -13,8 +19,8 @@ function App() {
         setArr([...arr, elem]);
       }}
       />
-      <DataViewer data={arr} remove={(id) => {
-        setArr(prev => prev.filter(o => o.id !== id))
+      <DataViewer data={prepareArr(arr)} remove={(id) => {
+        setArr(arr.filter(o => o.id !== id));
       }}/>
     </div>
   );
