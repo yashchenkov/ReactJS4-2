@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {nanoid} from 'nanoid';
+import moment from 'moment';
 
 export default function DataSetter(props) {
 	const [ dataValue, setDataValue ] = useState('');
@@ -24,8 +25,10 @@ export default function DataSetter(props) {
 		</div>
 		<button type="submit" onClick={(evt) => {
 			evt.preventDefault();
-			if(kmValue !== ''){
-			  arr({data: dataValue, km: kmValue, id: nanoid()})
+			const arr1 = dataValue.split('.');
+			const date = moment(arr1[2]+'-'+arr1[1]+'-'+arr1[0]);
+			if(kmValue !== '' && date.isValid()){
+			  arr({data: dataValue, km: kmValue, id: nanoid(), date: date})
 			  setDataValue('');
 			  setKmValue('');
 			}
