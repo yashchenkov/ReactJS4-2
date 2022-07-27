@@ -21,21 +21,23 @@ function App() {
     <div className="App">
       <DataSetter 
       arr={(elem) => {
-        let newArr = [];
-        let isValid = false;
-        /*if(arr.length > 0){
-          newArr = arr.map((el, index) => {
-            if(el.data === elem.data){
-              el.km += elem.km
-              isValid = true;
+        setArr(prevArr => {
+          let isChanged = false;
+          let newArr = prevArr.map(el => {
+            if(el.date.isSame(elem.date)) {
+              const kmm = parseInt(el.km) + parseInt(elem.km);
+              el.km = kmm;
+              isChanged = true;
             }
-          })
-        }*/
-        if(!isValid){
-          setArr([...arr, elem]);
-        } else {
-          setArr([...newArr, elem])
-        }
+            return el;
+          });
+          if(isChanged) {
+            return [...newArr];
+          } else {
+            return [...newArr, elem];
+          }
+        });
+        //setArr([...arr, elem]);
       }}
       />
       <DataViewer data={prepareArr(arr)} remove={(id) => {
